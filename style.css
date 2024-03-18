@@ -3,6 +3,7 @@
 	/* COLORS */
 	/* Primary */
 	--dark-cyan: hsl(158, 36%, 37%);
+	--darker-cyan: hsl(158, 36%, 20%);
 	--cream: hsl(30, 38%, 92%);
 	/* Neutral */
 	--very-dark-blue: hsl(212, 21%, 14%);
@@ -32,6 +33,10 @@
   3. Add accessible line-height
   4. Improve text rendering
 */
+html,
+body {
+	height: 100%;
+}
 body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
@@ -44,8 +49,10 @@ picture,
 video,
 canvas,
 svg {
-	max-inline-size: 100%;
-	block-size: auto;
+	/* max-inline-size: 100%;
+	block-size: auto; */
+	display: block;
+	max-width: 100%;
 }
 /*
   6. Remove built-in form typography styles
@@ -68,56 +75,53 @@ h5,
 h6 {
 	overflow-wrap: break-word;
 }
-/*
-  8. Create a root stacking context
-*/
-#root,
-#__next {
-	isolation: isolate;
-}
+
 /* GENERAL STYLES */
 body {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
 	color: var(--dark-grayish-blue);
 	background-color: var(--cream);
-	min-height: 100dvh;
-	padding-block: 2em;
+
+	display: grid;
+	place-content: center;
+	margin: 1em;
 }
 h1,
 h2 {
 	font-family: "Fraunces", serif;
 	line-height: 1.1;
 }
-main {
-	width: 90%;
-	margin-inline: auto;
+.product {
 	background-color: var(--white);
-	border-radius: 1em;
+	border-radius: 0.5em;
 	overflow: hidden;
+	display: grid;
+	max-width: 600px;
 }
-.product-overview {
-	padding: 2em;
+.product__overview {
+	display: grid;
+	gap: 1em;
+	padding: 1.5em;
 }
-.product-type {
+.product__type {
 	text-transform: uppercase;
-	letter-spacing: 3px;
+	letter-spacing: 5px;
 	margin-bottom: 1em;
 }
-.product-title {
+.product__title {
 	font-size: 2.5rem;
 	font-weight: 700;
 	color: var(--very-dark-blue);
 	margin-bottom: 0.5em;
 }
-.product-description {
+.product__description {
 	margin-bottom: 1em;
 }
-.product-prices {
+.product__prices {
 	display: flex;
 	align-items: center;
 	gap: 1em;
-	margin-bottom: 1em;
 }
 .sale-price {
 	font-family: "Fraunces", serif;
@@ -129,13 +133,35 @@ main {
 	text-decoration: line-through;
 }
 .button {
-	display: block;
-	text-align: center;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
 	background-color: var(--dark-cyan);
 	color: var(--white);
 	font-size: 1.25rem;
 	font-weight: 700;
 	text-decoration: none;
-	padding: 1em 2.5em;
+	text-align: center;
+	padding: 0.75em 2em;
 	border-radius: 0.5em;
+}
+.button img {
+	width: 15px;
+	height: 16px;
+}
+
+.button:hover,
+.button:focus {
+	background-color: var(--darker-cyan);
+}
+@media (min-width: 600px) {
+	.product {
+		grid-template-columns: 1fr 1fr;
+	}
+	.product__type,
+	.product__title,
+	.product__description {
+		margin: 0;
+	}
 }
